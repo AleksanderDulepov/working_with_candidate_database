@@ -6,42 +6,49 @@ import json
 # загрузка из json в список
 def load_candidates_from_json(address):
     with open(address, 'r', encoding='utf-8') as file:
-        x=json.load(file)
+        x = json.load(file)
         return x
 
-#создание обьектов класса candidate и запаковка их в список
+
+# создание обьектов класса candidate и запаковка их в список
 def get_objects_list(list_):
-    objects_list=[]
+    objects_list = []
     for i in list_:
-        objects_list.append(Candidate(i["id"],i["name"],i["picture"],i["position"],i["gender"],i["age"],i["skills"]))
+        objects_list.append(
+            Candidate(i["id"], i["name"], i["picture"], i["position"], i["gender"], i["age"], i["skills"]))
     return objects_list
 
-#загрузка файла и получение списка в одном блоке
+
+# загрузка файла и получение списка в одном блоке
 def load_data():
-    data_from_json=load_candidates_from_json(DATA_ADDRESS)
-    objects_list=get_objects_list(data_from_json)
+    data_from_json = load_candidates_from_json(DATA_ADDRESS)
+    objects_list = get_objects_list(data_from_json)
     return objects_list
 
-#возвращает кандидата по id
+
+# возвращает кандидата по id
 def get_candidate(cand_id):
-    candidates_list=load_data()
+    candidates_list = load_data()
     for object_ in candidates_list:
-        if i ==cand_id:
+        if object_.id == cand_id:
             return object_
     return None
-#список кандидатов по имени
-def get_candidates_by_name(cand_name):
-    candidates_list=load_data()
-    output_list=[]
-    for object_ in candidates_list:
-        if object_.name.lower()==cand_name.lower():
-            output_list.append(object_)
-        return output_list
 
-#список кандидатов по скиллам
+
+# список кандидатов по имени
+def get_candidates_by_name(cand_name):
+    candidates_list = load_data()
+    output_list = []
+    for object_ in candidates_list:
+        if object_.name.lower() == cand_name.lower():
+            output_list.append(object_)
+    return output_list
+
+
+# список кандидатов по скиллам
 def get_candidates_by_skill(cand_skill):
-    candidates_list=load_data()
-    output_list=[]
+    candidates_list = load_data()
+    output_list = []
     for object_ in candidates_list:
         if cand_skill.lower() in object_.get_skills_list():
             output_list.append(object_)
