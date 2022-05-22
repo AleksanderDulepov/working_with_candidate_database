@@ -10,3 +10,6 @@ class Candidate:
 
     def get_skills_list(self):
         return self.skills.lower().split(', ')
+
+    def get_name_in_list(self):
+        return self.name.lower().split()

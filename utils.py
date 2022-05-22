@@ -6,8 +6,8 @@ import json
 # загрузка из json в список
 def load_candidates_from_json(address):
     with open(address, 'r', encoding='utf-8') as file:
-        x = json.load(file)
-        return x
+        list_ = json.load(file)
+        return list_
 
 
 # создание обьектов класса candidate и запаковка их в список
@@ -38,11 +38,13 @@ def get_candidate(cand_id):
 # список кандидатов по имени
 def get_candidates_by_name(cand_name):
     candidates_list = load_data()
-    output_list = []
+    cand_name_list = cand_name.strip().lower().split()
+    output_set = set()
     for object_ in candidates_list:
-        if object_.name.lower() == cand_name.lower():
-            output_list.append(object_)
-    return output_list
+        for cand in cand_name_list:
+            if cand in object_.get_name_in_list():
+                output_set.add(object_)
+    return output_set
 
 
 # список кандидатов по скиллам
